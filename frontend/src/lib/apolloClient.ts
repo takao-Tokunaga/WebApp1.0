@@ -3,7 +3,7 @@ import { ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 
 const httpLink = createHttpLink({
-  uri: 'http://localhost:3001/graphql', // GraphQL エンドポイント
+  uri: 'http://localhost:3000/graphql', // GraphQL エンドポイント
 });
 
 const authLink = setContext((_, { headers }) => {
