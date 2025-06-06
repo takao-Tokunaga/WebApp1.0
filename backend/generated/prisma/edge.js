@@ -144,7 +144,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "/Users/takao/Desktop/graphql-tasks/backend/generated/prisma",
+      "value": "C:\\Users\\kinou\\WebApp1.0\\backend\\generated\\prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -153,17 +153,16 @@ const config = {
     "binaryTargets": [
       {
         "fromEnvVar": null,
-        "value": "darwin-arm64",
+        "value": "windows",
         "native": true
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "/Users/takao/Desktop/graphql-tasks/backend/prisma/schema.prisma",
+    "sourceFilePath": "C:\\Users\\kinou\\WebApp1.0\\backend\\prisma\\schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
-    "rootEnvPath": null,
-    "schemaEnvPath": "../../.env"
+    "rootEnvPath": null
   },
   "relativePath": "../../prisma",
   "clientVersion": "6.6.0",
