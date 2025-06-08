@@ -6,7 +6,7 @@
 
 generator client {
   provider = "prisma-client-js"
-  output   = "../generated/prisma"
+  output   = "../node_modules/.prisma/client"
 }
 
 datasource db {
@@ -40,4 +40,16 @@ model User {
   createdAt DateTime @default(now()) @db.Timestamp(0)
   updatedAt DateTime @updatedAt @db.Timestamp(0)
   task Task[]
+  profile Profile[]
+}
+
+model Profile {
+  id        Int @id @default(autoincrement())
+  displayName      String @db.VarChar(255)
+  bio       String?
+  goal      String?
+  createdAt DateTime @default(now()) @db.Timestamp(0)
+  updatedAt DateTime @updatedAt @db.Timestamp(0)
+  userId    Int @unique
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }

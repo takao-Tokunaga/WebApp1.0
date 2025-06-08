@@ -30,6 +30,15 @@ type SignInResponse {
   user: User!
 }
 
+type Profile {
+  id: Int!
+  displayName: String!
+  bio: String
+  goal: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
 type Query {
   getTasks(userId: Int!): [Task]!
   getUser(email: String!): User
@@ -40,6 +49,8 @@ type Mutation {
   updateTask(updateTaskInput: UpdateTaskInput!): Task!
   deleteTask(id: Int!): Task!
   createUser(createUserInput: CreateUserInput!): User!
+  createProfile(createProfileInput: CreateProfileInput!): Profile!
+  updateProfile(updateProfileInput: UpdateProfileInput!): Profile!
   signIn(signInInput: SignInInput!): SignInResponse!
 }
 
@@ -62,6 +73,20 @@ input CreateUserInput {
   name: String!
   email: String!
   password: String!
+}
+
+input CreateProfileInput {
+  displayName: String!
+  bio: String
+  goal: String
+  userId: Int!
+}
+
+input UpdateProfileInput {
+  id: Int!
+  displayName: String
+  bio: String
+  goal: String
 }
 
 input SignInInput {
