@@ -39,9 +39,20 @@ type Profile {
   updatedAt: DateTime!
 }
 
+type Schedule {
+  id: Int!
+  title: String!
+  dueDate: String!
+  description: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
 type Query {
   getTasks(userId: Int!): [Task]!
   getUser(email: String!): User
+  getProfile(userId: Int!): Profile
+  getSchedules(userId: Int!): [Schedule]!
 }
 
 type Mutation {
@@ -51,6 +62,9 @@ type Mutation {
   createUser(createUserInput: CreateUserInput!): User!
   createProfile(createProfileInput: CreateProfileInput!): Profile!
   updateProfile(updateProfileInput: UpdateProfileInput!): Profile!
+  createSchedule(createScheduleInput: CreateScheduleInput!): Schedule!
+  updateSchedule(updateScheduleInput: UpdateScheduleInput!): Schedule!
+  deleteSchedule(id: Int!): Schedule!
   signIn(signInInput: SignInInput!): SignInResponse!
 }
 
@@ -87,6 +101,21 @@ input UpdateProfileInput {
   displayName: String
   bio: String
   goal: String
+}
+
+input CreateScheduleInput {
+  title: String!
+  dueDate: String!
+  description: String
+  userId: Int!
+}
+
+input UpdateScheduleInput {
+  id: Int!
+  title: String
+  dueDate: String
+  description: String
+  userId: Float!
 }
 
 input SignInInput {
