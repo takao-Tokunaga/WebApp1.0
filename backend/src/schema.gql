@@ -42,6 +42,7 @@ type Profile {
 type Query {
   getTasks(userId: Int!): [Task]!
   getUser(email: String!): User
+  getProfile(userId: Int!): Profile
 }
 
 type Mutation {
@@ -87,7 +88,7 @@ input UpdateProfileInput {
   displayName: String
   bio: String
   goal: String
-}
+ }
 
 input SignInInput {
   email: String!

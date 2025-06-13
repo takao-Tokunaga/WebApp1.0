@@ -59,3 +59,6 @@ docker
 
 #Prisma generated files
 backend/generated/
+
+# 自動生成された GraphQL スキーマ
+/backend/src/schema.gql
