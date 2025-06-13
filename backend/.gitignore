@@ -59,3 +59,5 @@ docker
 
 #Prisma generated files
 backend/generated/
+
+backend/src/schema.gql
