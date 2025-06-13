@@ -1,0 +1,1 @@
+export type PostStatus = '勉強' | 'バイト' | '就活' | '部活' | 'その他';
