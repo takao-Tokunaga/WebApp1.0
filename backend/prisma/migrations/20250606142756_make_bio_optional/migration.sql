@@ -1,0 +1,8 @@
+-- DropIndex
+DROP INDEX "Profile_bio_key";
+
+-- AlterTable
+ALTER TABLE "Profile" ALTER COLUMN "bio" DROP NOT NULL,
+ALTER COLUMN "bio" SET DATA TYPE TEXT,
+ALTER COLUMN "goal" DROP NOT NULL,
+ALTER COLUMN "goal" SET DATA TYPE TEXT;
