@@ -41,6 +41,7 @@ model User {
   updatedAt DateTime @updatedAt @db.Timestamp(0)
   task Task[]
   profile Profile[]
+  schedule Schedule[]
 }
 
 model Profile {
@@ -51,5 +52,16 @@ model Profile {
   createdAt DateTime @default(now()) @db.Timestamp(0)
   updatedAt DateTime @updatedAt @db.Timestamp(0)
   userId    Int @unique
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Schedule {
+  id Int @id @default(autoincrement())
+  title String @db.VarChar(255)
+  dueDate String @db.VarChar(10)
+  description String?
+  createdAt DateTime @default(now()) @db.Timestamp(0)
+  updatedAt DateTime @updatedAt @db.Timestamp(0)
+  userId    Int
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
