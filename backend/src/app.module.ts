@@ -9,6 +9,7 @@ import { AuthModule } from './auth/auth.module';
 import { ProfileModule } from './profile/profile.module';
 import { ConfigModule } from '@nestjs/config';
 import { ScheduleModule } from './schedule/schedule.module';
+import { PostModule } from './post/post.modules';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { ScheduleModule } from './schedule/schedule.module';
     UserModule,
     ProfileModule,
     ScheduleModule,
+    PostModule,
     AuthModule,
   ],
 })

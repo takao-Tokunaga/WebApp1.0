@@ -34,14 +34,15 @@ enum Status {
 
 model User {
   id        Int @id @default(autoincrement())
-  name      String @db.VarChar(255)
+  name      String @unique @db.VarChar(255)
   email     String @unique @db.VarChar(255)
   password  String @db.VarChar(255)
   createdAt DateTime @default(now()) @db.Timestamp(0)
   updatedAt DateTime @updatedAt @db.Timestamp(0)
-  task Task[]
-  profile Profile[]
-  schedule Schedule[]
+  task      Task[]
+  profile   Profile?
+  schedule  Schedule[]
+  post      Post[]
 }
 
 model Profile {
@@ -64,4 +65,22 @@ model Schedule {
   updatedAt DateTime @updatedAt @db.Timestamp(0)
   userId    Int
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Post {
+  id          Int       @id @default(autoincrement())
+  description String?
+  type        PostType   @default(勉強)
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt @db.Timestamp(0)
+  userId      Int
+  user        User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+enum PostType {
+  勉強
+  バイト
+  就活
+  部活
+  その他
 }

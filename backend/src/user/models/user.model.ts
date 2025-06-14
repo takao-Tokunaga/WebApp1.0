@@ -1,5 +1,5 @@
 import { Field, HideField, Int, ObjectType } from '@nestjs/graphql';
-
+import { Profile } from 'src/profile/models/profile.model';
 @ObjectType()
 export class User {
   @Field(() => Int)
@@ -19,4 +19,7 @@ export class User {
 
   @Field()
   updatedAt: Date;
+
+  @Field(() => Profile, { nullable: true }) // ← これを追加！
+  profile?: Profile;
 }
