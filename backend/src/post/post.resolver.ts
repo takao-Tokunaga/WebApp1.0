@@ -32,6 +32,13 @@ export class PostResolver {
     return await this.postService.getPost(userId);
   }
 
+  // 全てのPostデータを取得
+  @Query(() => [Post], { nullable: true })
+  @UseGuards(JwtAuthGuard)
+  async getAllPosts(): Promise<PrismaPost[]> {
+    return await this.postService.getAllPosts();
+  }
+
   @Mutation(() => Post)
   @UseGuards(JwtAuthGuard)
   async createPost(

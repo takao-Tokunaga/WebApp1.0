@@ -52,4 +52,19 @@ export class PostService {
       where: { id },
     });
   }
+
+  // 全てのPostデータを取得
+  async getAllPosts(): Promise<PrismaPost[]> {
+    return this.prismaService.post.findMany({
+      include: {
+        user: {
+          include: { profile: true },
+        },
+      },
+      // 投稿作成日時で新しい順に並び替え
+      orderBy: {
+        createdAt: 'desc',
+      },
+    });
+  }
 }

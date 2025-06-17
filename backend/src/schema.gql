@@ -65,6 +65,7 @@ type Query {
   getProfile(userId: Int!): Profile
   getSchedules(userId: Int!): [Schedule]!
   getPost(userId: Int!): [Post!]
+  getAllPosts: [Post!]
 }
 
 type Mutation {
