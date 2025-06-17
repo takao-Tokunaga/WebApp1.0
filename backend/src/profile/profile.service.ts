@@ -11,18 +11,24 @@ export class ProfileService {
   async getProfile(userId: number): Promise<PrismaProfile | null> {
     return this.prismaService.profile.findFirst({
       where: { userId },
+      include: {
+        user: {
+          select: { name: true },
+        },
+      },
     });
   }
 
   async createProfile(
     createProfileInput: CreateProfileInput,
   ): Promise<PrismaProfile> {
-    const { displayName, bio, goal, userId } = createProfileInput;
+    const { displayName, bio, goal, imageUrl, userId } = createProfileInput;
     return this.prismaService.profile.create({
       data: {
         displayName,
         bio,
         goal,
+        imageUrl,
         userId,
       },
     });
@@ -31,9 +37,9 @@ export class ProfileService {
   async updateProfile(
     updateProfileInput: UpdateProfileInput,
   ): Promise<PrismaProfile> {
-    const { id, displayName, bio, goal } = updateProfileInput;
+    const { id, displayName, bio, goal, imageUrl } = updateProfileInput;
     return await this.prismaService.profile.update({
-      data: { id, displayName, bio, goal },
+      data: { id, displayName, bio, goal, imageUrl },
       where: { id },
     });
   }
