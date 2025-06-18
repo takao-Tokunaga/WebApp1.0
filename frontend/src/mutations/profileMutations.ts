@@ -7,6 +7,7 @@ mutation createProfile($createProfileInput: CreateProfileInput!){
     displayName
     bio
     goal
+    imageUrl
   }
 }
 `;
@@ -18,6 +19,7 @@ mutation updateProfile($updateProfileInput: UpdateProfileInput!) {
     displayName
     bio
     goal
+    imageUrl
   }
 }
 `;

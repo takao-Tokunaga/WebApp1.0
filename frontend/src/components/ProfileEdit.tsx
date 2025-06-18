@@ -6,13 +6,13 @@ import { GET_PROFILE } from '../queries/profileQueries';
 import { CREATE_PROFILE, UPDATE_PROFILE } from '../mutations/profileMutations';
 import { Profile } from '../types/profile';
 import { useRouter } from 'next/navigation';
-
+import UploadImage from './UploadImage';
 
 export default function ProfileEdit({ userId }: { userId: number }) {
   const [displayName, setName] = useState('');
   const [bio, setBio] = useState('');
   const [goal, setGoal] = useState('');
-
+  const [imageUrl, setImageUrl] = useState<string | null>(null)
   const { data } = useQuery<{ getProfile: Profile }>(GET_PROFILE, {
     variables: { userId },
   });
@@ -22,6 +22,7 @@ export default function ProfileEdit({ userId }: { userId: number }) {
       setName(data.getProfile.displayName ?? '');
       setBio(data.getProfile.bio ?? '');
       setGoal(data.getProfile.goal ?? '');
+      setImageUrl(data.getProfile.imageUrl ?? '')
     }
   }, [data]);
 
@@ -33,7 +34,13 @@ export default function ProfileEdit({ userId }: { userId: number }) {
   const handleSave = async () => {
   const profile = data?.getProfile;
 
-  const createProfileInput = { displayName, bio, goal, userId };
+  const createProfileInput = {
+    displayName,
+    bio,
+    goal,
+    imageUrl, 
+    userId,
+  };
 
   try {
     if (profile?.id) {
@@ -43,6 +50,7 @@ export default function ProfileEdit({ userId }: { userId: number }) {
         displayName,
         bio,
         goal,
+        imageUrl,
       };
 
       await updateProfile({
@@ -68,18 +76,24 @@ export default function ProfileEdit({ userId }: { userId: number }) {
   return (
   <div className="max-w-md mx-auto p-6">
     <div className="bg-white p-8 rounded-xl shadow-lg">
-      <div className='divide-y divide-blue-400'>
+      <div className='space-y-7 divide-y divide-blue-400'>
         <div>
           <h2 className="text-2xl font-bold mb-3 text-center" style={{ color: 'black' }}>
             プロフィール編集
           </h2>
           <div className="flex justify-center">
-            <img className="w-24 h-24 rounded-full border mb-8" src="/default-avatar.png"/>
+            <div className="flex flex-col items-center">
+              <img 
+              className="w-24 h-24 rounded-full border mb-2 object-cover"
+              src={imageUrl || data?.getProfile?.imageUrl || '/default-avatar.png'}
+              alt="Profile"
+              />
+              <UploadImage onUploadComplete={(url) => setImageUrl(url)} />
+            </div>
           </div>
         </div>
-        
-        
-        <div className="mb-4">
+         
+        <div className="mb-5">
           <label className="block mb-1 font-semibold" style={{ color: 'black' }}>名前</label>
           <input
             className="border border-gray-300 rounded px-3 py-2 w-full focus:outline-blue-400"

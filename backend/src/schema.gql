@@ -22,8 +22,10 @@ type Profile {
   displayName: String!
   bio: String
   goal: String
+  imageUrl: String
   createdAt: DateTime!
   updatedAt: DateTime!
+  user: User!
 }
 
 type User {
@@ -108,6 +110,7 @@ input CreateProfileInput {
   displayName: String!
   bio: String
   goal: String
+  imageUrl: String
   userId: Int!
 }
 
@@ -116,6 +119,7 @@ input UpdateProfileInput {
   displayName: String
   bio: String
   goal: String
+  imageUrl: String
 }
 
 input CreateScheduleInput {
