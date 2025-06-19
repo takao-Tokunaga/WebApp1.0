@@ -7,7 +7,7 @@ export default function Sidebar() {
  
   const menuItems = [
     { name: 'プロフィール', path: '/profile' },
-    { name: 'タイムライン', path: '/timeline' },
+    { name: 'タイムライン', path: '/mytimeline' },
     { name: 'レポート', path: '/main/report' },
   ]
 
