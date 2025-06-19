@@ -39,6 +39,14 @@ export class PostResolver {
     return await this.postService.getAllPosts();
   }
 
+  //フォローしている人のPostデータを取得
+  @Query(() => [Post], { nullable: true })
+  async getPostsFromFollowedUsers(
+    @Args('userId', { type: () => Int }) userId: number,
+  ): Promise<PrismaPost[]> {
+    return await this.postService.getPostsFromFollowedUsers(userId);
+  }
+
   @Mutation(() => Post)
   @UseGuards(JwtAuthGuard)
   async createPost(

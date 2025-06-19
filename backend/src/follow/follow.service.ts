@@ -1,12 +1,14 @@
-import { Injectable } from '@nestjs/common';
-import { Follow } from '@prisma/client';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
-
+import { Follow } from '@prisma/client';
 @Injectable()
 export class FollowService {
   constructor(private readonly prismaService: PrismaService) {}
 
   async follow(followerId: number, followingId: number): Promise<Follow> {
+    if (followerId === followingId) {
+      throw new BadRequestException('自分自身をフォローすることはできません');
+    }
     return await this.prismaService.follow.create({
       data: { followerId, followingId },
     });
