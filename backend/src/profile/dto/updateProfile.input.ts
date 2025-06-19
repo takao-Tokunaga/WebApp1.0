@@ -17,4 +17,8 @@ export class UpdateProfileInput {
   @Field(() => String, { nullable: true })
   @IsOptional()
   goal?: string | null;
+
+  @Field(() => String, { nullable: true })
+  @IsOptional()
+  imageUrl?: string | null;
 }

@@ -1,4 +1,5 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql';
+import { User } from 'src/user/models/user.model';
 
 @ObjectType()
 export class Profile {
@@ -14,9 +15,15 @@ export class Profile {
   @Field({ nullable: true })
   goal?: string;
 
+  @Field(() => String, { nullable: true })
+  imageUrl?: string;
+
   @Field()
   createdAt: Date;
 
   @Field()
   updatedAt: Date;
+
+  @Field(() => User)
+  user: User;
 }

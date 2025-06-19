@@ -7,6 +7,7 @@ query getProfile($userId: Int!) {
     displayName
     bio
     goal
+    imageUrl
   }
 }
 `
