@@ -52,4 +52,38 @@ export class PostService {
       where: { id },
     });
   }
+
+  // 全てのPostデータを取得
+  async getAllPosts(): Promise<PrismaPost[]> {
+    return this.prismaService.post.findMany({
+      include: {
+        user: {
+          include: { profile: true },
+        },
+      },
+      // 投稿作成日時で新しい順に並び替え
+      orderBy: {
+        createdAt: 'desc',
+      },
+    });
+  }
+
+  // フォローしているユーザーのPostデータを取得
+  async getPostsFromFollowedUsers(userId: number): Promise<PrismaPost[]> {
+    //フォローしているユーザーのIDを取得
+    const followed = await this.prismaService.follow.findMany({
+      where: { followerId: userId },
+      select: { followingId: true },
+    });
+    const followingIds = followed.map((f) => f.followingId);
+    const posts = await this.prismaService.post.findMany({
+      where: {
+        userId: { in: followingIds },
+      },
+      orderBy: {
+        createdAt: 'desc',
+      },
+    });
+    return posts;
+  }
 }

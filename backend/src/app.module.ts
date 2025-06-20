@@ -10,7 +10,7 @@ import { ProfileModule } from './profile/profile.module';
 import { ConfigModule } from '@nestjs/config';
 import { ScheduleModule } from './schedule/schedule.module';
 import { PostModule } from './post/post.modules';
-
+import { FollowModule } from './follow/follow.module';
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
@@ -26,6 +26,7 @@ import { PostModule } from './post/post.modules';
     ScheduleModule,
     PostModule,
     AuthModule,
+    FollowModule,
   ],
 })
 export class AppModule {}

@@ -67,6 +67,9 @@ type Query {
   getProfile(userId: Int!): Profile
   getSchedules(userId: Int!): [Schedule]!
   getPost(userId: Int!): [Post!]
+  getAllPosts: [Post!]
+  getPostsFromFollowedUsers(userId: Int!): [Post!]
+  getFollowingIds(userId: Int!): [Int!]!
 }
 
 type Mutation {
@@ -83,6 +86,8 @@ type Mutation {
   updatePost(updatePostInput: UpdatePostInput!): Post!
   deletePost(id: Int!, userId: Int!): Post!
   signIn(signInInput: SignInInput!): SignInResponse!
+  follow(followerId: Int!, folloingId: Int!): Boolean!
+  unfollow(followerId: Int!, followingId: Int!): Boolean!
 }
 
 input CreateTaskInput {

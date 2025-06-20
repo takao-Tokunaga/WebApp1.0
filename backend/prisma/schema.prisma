@@ -43,6 +43,8 @@ model User {
   profile   Profile?
   schedule  Schedule[]
   post      Post[]
+  following Follow[] @relation("Follower")
+  followers Follow[] @relation("Following")
 }
 
 model Profile {
@@ -84,4 +86,15 @@ enum PostType {
   就活
   部活
   その他
+}
+
+model Follow {
+    id          Int       @id @default(autoincrement())
+    follower    User @relation("Follower", fields: [followerId], references: [id])
+    followerId  Int 
+    following   User @relation("Following", fields: [followingId], references: [id])
+    followingId   Int 
+    
+    // 同じ人が同じ相手を2回以上フォローできないようにする
+    @@unique([followerId, followingId])
 }
